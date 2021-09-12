@@ -4012,6 +4012,11 @@ p-try@^2.0.0:
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.2.0.tgz#cb2868540e313d61de58fafbe35ce9004d5540e6"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
 
+p@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/p/-/p-0.2.0.tgz#46a8e8a63beca00ebf6638248621e8a09cb24a7b"
+  integrity sha1-RqjopjvsoA6/ZjgkhiHooJyySns=
+
 packet-reader@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/packet-reader/-/packet-reader-1.0.0.tgz#9238e5480dedabacfe1fe3f2771063f164157d74"
