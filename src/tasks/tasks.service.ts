@@ -1,9 +1,17 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+
 import { TaskStatus } from './task-status.enum';
 import { CreateTaskDto, GetTasksFilterDto } from './dto';
+import { TasksRepository } from './tasks.repository';
+import { Task } from './task.entity';
 
 @Injectable()
 export class TasksService {
+  constructor(
+    @InjectRepository(TasksRepository)
+    private tasksRepository: TasksRepository,
+  ) {}
   //  getAllTasks(): Task[] { return this.tasks }
   //
   //  getTasksWithFilters(filterDto: GetTasksFilterDto): Task[] {
@@ -27,21 +35,16 @@ export class TasksService {
   //    return tasks;
   //  }
   //
-  //  getTaskById(id: string): Task {
-  //    // try to get task
-  //    // if not found, throw an error (404 not found)
-  //    // otherwise, return the found task
-  //    const found = this.tasks.find((task) => task.id === id);
-  //
-  //    if (!found) {
-  //      /** is possible to use a custom message.*/
-  //      // throw new NotFoundException(`Task with ID ${id} not found`);
-  //      throw new NotFoundException();
-  //    }
-  //
-  //    return found;
-  //  }
-  //
+  async getTaskById(id: string): Promise<Task> {
+    const found = await this.tasksRepository.findOne(id);
+
+    if (!found) {
+      throw new NotFoundException(`Task with ID ${id} not found`);
+    }
+
+    return found;
+  }
+
   //  createTask(createTaskDto: CreateTaskDto): Task {
   //    const { title, description } = createTaskDto;
   //    const task: Task = {
