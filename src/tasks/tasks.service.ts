@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+// import { DeleteResult } from 'typeorm';
 
 import { TaskStatus } from './task-status.enum';
 import { CreateTaskDto, GetTasksFilterDto } from './dto';
@@ -55,8 +56,17 @@ export class TasksService {
   //    return task;
   //  }
   //
-  //  deleteTask(id: string): void {
-  //    const found = this.getTaskById(id);
-  //    this.tasks = this.tasks.filter((task) => task.id !== found.id);
+
+  async deleteTask(id: string): Promise<void> {
+    const result = await this.tasksRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Task with ID '${id}' not found`);
+    }
+  }
+
+  //--- My solution using DeleteResult
+  //
+  //  async deleteTask(id: string): Promise<DeleteResult> {
+  //    return await this.tasksRepository.delete(id);
   //  }
 }
